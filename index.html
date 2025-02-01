@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Richu Joseph - Cybersecurity Portfolio</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'IBM Plex Mono', monospace;
+        }
+
+        :root {
+            --neon-green: #00ff4c;
+            --cyber-blue: #00ffff;
+            --dark-bg: #0a0a0a;
+            --darker-bg: #050505;
+            --terminal-green: #4af626;
+        }
+
+        body {
+            background: var(--dark-bg);
+            color: #fff;
+            line-height: 1.6;
+        }
+
+        .matrix-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.1;
+            pointer-events: none;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(10px);
+            z-index: 100;
+            border-bottom: 1px solid var(--cyber-blue);
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            color: var(--cyber-blue);
+            font-size: 1.5rem;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo::before {
+            content: ">";
+            animation: blink 1s infinite;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            position: relative;
+            padding: 0.5rem 1rem;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--cyber-blue);
+        }
+
+        .nav-links a::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--cyber-blue);
+            transform: scaleX(0);
+            transition: transform 0.3s;
+        }
+
+        .nav-links a:hover::before {
+            transform: scaleX(1);
+        }
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, rgba(0,0,0,0.9) 0%, rgba(0,25,50,0.8) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('/api/placeholder/1920/1080') center/cover;
+            opacity: 0.1;
+            animation: glitch 2s infinite;
+        }
+
+        .profile-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .profile-image {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            border: 2px solid var(--cyber-blue);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .profile-image::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(45deg, transparent, var(--cyber-blue), transparent);
+            animation: borderGlow 3s linear infinite;
+        }
+
+        .profile-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(30%);
+        }
+
+        .profile-text {
+            position: relative;
+        }
+
+        .glitch-text {
+            font-size: 3rem;
+            color: var(--cyber-blue);
+            text-shadow: 2px 2px 10px rgba(0, 255, 255, 0.5);
+            margin-bottom: 1rem;
+            position: relative;
+        }
+
+        .glitch-text::before,
+        .glitch-text::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .glitch-text::before {
+            color: var(--neon-green);
+            clip: rect(24px, 550px, 90px, 0);
+            animation: glitch-anim 3s infinite linear alternate-reverse;
+        }
+
+        .glitch-text::after {
+            color: var(--cyber-blue);
+            clip: rect(85px, 550px, 140px, 0);
+            animation: glitch-anim 2s infinite linear alternate-reverse;
+        }
+
+        .terminal-text {
+            font-family: 'IBM Plex Mono', monospace;
+            color: var(--terminal-green);
+            margin-bottom: 1rem;
+        }
+
+        .terminal-text::before {
+            content: '> ';
+            animation: blink 1s infinite;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 4rem 0;
+        }
+
+        .skill-card {
+            background: rgba(0, 0, 0, 0.7);
+            border: 1px solid var(--cyber-blue);
+            padding: 2rem;
+            border-radius: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                45deg,
+                transparent,
+                rgba(0, 255, 255, 0.1),
+                transparent
+            );
+            transform: rotate(45deg);
+            animation: shine 3s infinite;
+        }
+
+        .skill-progress {
+            height: 8px;
+            background: rgba(0, 255, 255, 0.1);
+            border-radius: 4px;
+            margin: 1rem 0;
+            overflow: hidden;
+        }
+
+        .skill-progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--neon-green), var(--cyber-blue));
+            width: 0;
+            transition: width 1s ease-in-out;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 4rem 0;
+        }
+
+        .project-card {
+            background: rgba(0, 0, 0, 0.7);
+            border: 1px solid var(--cyber-blue);
+            padding: 2rem;
+            border-radius: 10px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+        }
+
+        @keyframes glitch {
+            0% { transform: translate(0) }
+            20% { transform: translate(-2px, 2px) }
+            40% { transform: translate(-2px, -2px) }
+            60% { transform: translate(2px, 2px) }
+            80% { transform: translate(2px, -2px) }
+            100% { transform: translate(0) }
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        @keyframes shine {
+            0% { transform: rotate(45deg) translateX(-100%) }
+            100% { transform: rotate(45deg) translateX(100%) }
+        }
+
+        @keyframes borderGlow {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        @keyframes glitch-anim {
+            0% {
+                clip: rect(44px, 550px, 90px, 0);
+                transform: skew(0.2deg);
+            }
+            100% {
+                clip: rect(85px, 550px, 140px, 0);
+                transform: skew(-0.2deg);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .profile-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .profile-image {
+                margin: 0 auto;
+                width: 250px;
+                height: 250px;
+            }
+
+            .nav-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .glitch-text {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <canvas class="matrix-bg" id="matrixCanvas"></canvas>
+    
+    <nav>
+        <div class="container">
+            <div class="nav-content">
+                <a href="#" class="logo">RICHU_JOSEPH</a>
+                <ul class="nav-links">
+                    <li><a href="#home" data-aos="fade-down" data-aos-delay="100">HOME</a></li>
+                    <li><a href="#about" data-aos="fade-down" data-aos-delay="200">ABOUT</a></li>
+                    <li><a href="#skills" data-aos="fade-down" data-aos-delay="300">SKILLS</a></li>
+                    <li><a href="#projects" data-aos="fade-down" data-aos-delay="400">PROJECTS</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero" id="home">
+    <div class="container">
+        <div class="profile-content">
+            <div class="profile-image" data-aos="fade-right">
+                <!-- Replace the src with the URL of your image -->
+                <img src="https://raw.githubusercontent.com/richujoseph/my_web/refs/heads/main/richu%20.jpg" style="width: 300px; height: auto; object-fit: cover;">
+            </div>
+            <div class="profile-text" data-aos="fade-left">
+                <h1 class="glitch-text" data-text="RICHU JOSEPH">RICHU JOSEPH</h1>
+                <div class="terminal-text">Cybersecurity Specialist</div>
+                <p>Student at St. Joseph's College of Engineering and Technology, Palai</p>
+                <p>Specializing in Bug Bounty Programs, CTFs, and Ethical Hacking</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+   <style>
+    .skill-progress {
+        background-color: #e0e0e0; /* Background color of the progress bar */
+        border-radius: 5px; /* Rounded corners */
+        height: 20px; /* Height of the progress bar */
+        margin: 5px 0; /* Margin between skill items */
+    }
+
+    .skill-progress-bar {
+        background-color: #4CAF50; /* Color of the filled part of the progress bar */
+        height: 100%; /* Fill the height of the parent */
+        border-radius: 5px; /* Rounded corners */
+        width: 0; /* Start with 0 width */
+        transition: width 1s ease; /* Smooth transition for width change */
+    }
+</style>
+
+<style>
+    .skill-progress {
+        background-color: #e0e0e0; /* Background color of the progress bar */
+        border-radius: 5px; /* Rounded corners */
+        height: 20px; /* Height of the progress bar */
+        margin: 5px 0; /* Margin between skill items */
+    }
+
+    .skill-progress-bar {
+        background-color: #76c7c0; /* Color of the filled part of the progress bar */
+        height: 100%; /* Fill the height of the parent */
+        border-radius: 5px; /* Rounded corners */
+        transition: width 0.5s ease; /* Smooth transition for width change */
+    }
+</style>
+
+<style>
+    .skill-progress {
+        background-color: #e0e0e0; /* Background color of the progress bar */
+        border-radius: 5px; /* Rounded corners */
+        height: 20px; /* Height of the progress bar */
+        margin: 5px 0; /* Margin between skill items */
+    }
+
+    .skill-progress-bar {
+        background-color: #76c7c0; /* Color of the filled part of the progress bar */
+        height: 100%; /* Fill the height of the parent */
+        border-radius: 5px; /* Rounded corners */
+        transition: width 0.5s ease; /* Smooth transition for width change */
+    }
+</style>
+
+<section id="skills">
+    <div class="container">
+        <h2 class="section-title" data-aos="fade-up">SKILLS</h2>
+        <div class="skills-grid">
+            <div class="skill-card" data-aos="fade-up" data-aos-delay="100">
+                <h3>Technical Skills</h3>
+                <div class="skill-item">
+                    <div class="skill-name">Python</div>
+                    <div class="skill-progress">
+                        <div class="skill-progress-bar" style="width: 90%"></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-name">Java</div>
+                    <div class="skill-progress">
+                        <div class="skill-progress-bar" style="width: 85%"></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-name">HTML</div>
+                    <div class="skill-progress">
+                        <div class="skill-progress-bar" style="width: 95%"></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-name">CSS</div>
+                    <div class="skill-progress">
+                        <div class="skill-progress-bar" style="width: 90%"></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-name">Bash Scripting</div>
+                    <div class="skill-progress">
+                        <div class="skill-progress-bar" style="width: 80%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+                </div>
+                <!-- Add more skill cards -->
+            </div>
+        </div>
+    </section>
+
+    <section id="projects">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">PROJECTS</h2>
+            <div class="projects-grid">
+                <!-- Project cards here -->
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 1000,
+            once: true,
+            offset: 100
+        });
+
+        // Matrix rain effect
+        const canvas = document.getElementById('matrixCanvas');
+        const ctx = canvas.getContext('2d');
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789<>?/[]{}|=+-_)(*&^%$#@!~';
+        const fontSize = 14;
+        const columns = canvas.width / fontSize;
+        const drops = [];
+
+        for (let i = 0; i < columns; i++) {
+            drops[i] = 1;
+        }
+
+        function drawMatrix() {
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            ctx.fillStyle = '#0F0';
+            ctx.font = fontSize + 'px monospace';
+
+            for (let i = 0; i < drops.length; i++) {
+                const text = characters.charAt(Math.floor(Math.random() * characters.length));
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+                drops[i]++;
+            }
+        }
+
+        setInterval(drawMatrix, 33);
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+
+        // Animate skill bars on scroll
+        const animateSkills = () => {
+            const skillBars = document.querySelectorAll('.skill-progress-bar');
+            skillBars.forEach(bar => {
+                const width = bar.getAttribute('data-width');
+                bar.style.width = width;
+            });
+        };
+
+        // Intersection Observer for skill animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateSkills();
+                }
+            });
+        });
+
+        const skillsSection = document.querySelector('#skills');
+        if (skillsSection) {
+            observer.observe(skillsSection);
+        }
+    </script>
+</body>
+</html>
