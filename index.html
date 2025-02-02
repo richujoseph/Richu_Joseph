@@ -110,6 +110,11 @@
             transform: scaleX(1);
         }
 
+        section {
+            padding: 100px 0;
+            margin: 50px 0;
+        }
+
         .hero {
             min-height: 100vh;
             display: flex;
@@ -119,16 +124,12 @@
             overflow: hidden;
         }
 
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('/api/placeholder/1920/1080') center/cover;
-            opacity: 0.1;
-            animation: glitch 2s infinite;
+        .section-title {
+            color: var(--cyber-blue);
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            text-transform: uppercase;
         }
 
         .profile-content {
@@ -147,14 +148,6 @@
             overflow: hidden;
         }
 
-        .profile-image::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(45deg, transparent, var(--cyber-blue), transparent);
-            animation: borderGlow 3s linear infinite;
-        }
-
         .profile-image img {
             width: 100%;
             height: 100%;
@@ -168,32 +161,10 @@
 
         .glitch-text {
             font-size: 3rem;
-            color: var(--cyber-blue);
+            color: var(-- cyber-blue);
             text-shadow: 2px 2px 10px rgba(0, 255, 255, 0.5);
             margin-bottom: 1rem;
             position: relative;
-        }
-
-        .glitch-text::before,
-        .glitch-text::after {
-            content: attr(data-text);
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        }
-
-        .glitch-text::before {
-            color: var(--neon-green);
-            clip: rect(24px, 550px, 90px, 0);
-            animation: glitch-anim 3s infinite linear alternate-reverse;
-        }
-
-        .glitch-text::after {
-            color: var(--cyber-blue);
-            clip: rect(85px, 550px, 140px, 0);
-            animation: glitch-anim 2s infinite linear alternate-reverse;
         }
 
         .terminal-text {
@@ -202,64 +173,61 @@
             margin-bottom: 1rem;
         }
 
-        .terminal-text::before {
-            content: '> ';
-            animation: blink 1s infinite;
+        .about-content {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 2rem;
+            border-radius: 10px;
+            border: 1px solid var(--cyber-blue);
+        }
+
+        .about-content p {
+            margin-bottom: 1rem;
         }
 
         .skills-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
-            padding: 4rem 0;
         }
 
         .skill-card {
-            background: rgba(0, 0, 0, 0.7);
+            background: rgba(0, 0, 0, 0.8);
             border: 1px solid var(--cyber-blue);
-            padding: 2rem;
+            padding: 30px;
             border-radius: 10px;
-            position: relative;
-            overflow: hidden;
+            margin: 15px 0;
         }
 
-        .skill-card::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(
-                45deg,
-                transparent,
-                rgba(0, 255, 255, 0.1),
-                transparent
-            );
-            transform: rotate(45deg);
-            animation: shine 3s infinite;
+        .skill-item {
+            margin-bottom: 20px;
+        }
+
+        .skill-name {
+            margin-bottom: 8px;
+            color: var(--cyber-blue);
+            font-weight: bold;
         }
 
         .skill-progress {
-            height: 8px;
-            background: rgba(0, 255, 255, 0.1);
-            border-radius: 4px;
-            margin: 1rem 0;
-            overflow: hidden;
+            background-color: #1a1a1a;
+            border-radius: 5px;
+            height: 20px;
+            margin: 15px 0;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
         }
 
         .skill-progress-bar {
+            background: linear-gradient(90deg, #00ff4c, #00ffff);
             height: 100%;
-            background: linear-gradient(90deg, var(--neon-green), var(--cyber-blue));
-            width: 0;
-            transition: width 1s ease-in-out;
+            border-radius: 5px;
+            position: relative;
+            overflow: hidden;
         }
 
         .projects-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
-            padding: 4rem 0;
         }
 
         .project-card {
@@ -268,7 +236,6 @@
             padding: 2rem;
             border-radius: 10px;
             transition: transform 0.3s, box-shadow 0.3s;
-            position: relative;
         }
 
         .project-card:hover {
@@ -276,39 +243,32 @@
             box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
         }
 
-        @keyframes glitch {
-            0% { transform: translate(0) }
-            20% { transform: translate(-2px, 2px) }
-            40% { transform: translate(-2px, -2px) }
-            60% { transform: translate(2px, 2px) }
-            80% { transform: translate(2px, -2px) }
-            100% { transform: translate(0) }
+        .contact-links {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .social-links {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1rem;
+        }
+
+        .social-links img {
+            width: 40px;
+            height: 40px;
+            transition: transform 0.3s;
+        }
+
+        .social-links img:hover {
+            transform: scale(1.2);
         }
 
         @keyframes blink {
             0%, 100% { opacity: 1; }
             50% { opacity: 0; }
-        }
-
-        @keyframes shine {
-            0% { transform: rotate(45deg) translateX(-100%) }
-            100% { transform: rotate(45deg) translateX(100%) }
-        }
-
-        @keyframes borderGlow {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
-        }
-
-        @keyframes glitch-anim {
-            0% {
-                clip: rect(44px, 550px, 90px, 0);
-                transform: skew(0.2deg);
-            }
-            100% {
-                clip: rect(85px, 550px, 140px, 0);
-                transform: skew(-0.2deg);
-            }
         }
 
         @media (max-width: 768px) {
@@ -352,198 +312,119 @@
     </nav>
 
     <section class="hero" id="home">
-    <div class="container">
-        <div class="profile-content">
-            <div class="profile-image" data-aos="fade-right">
-                <!-- Replace the src with the URL of your image -->
-                <img src="https://raw.githubusercontent.com/richujoseph/my_web/refs/heads/main/richu%20.jpg" style="width: 300px; height: auto; object-fit: cover;">
-            </div>
-            <div class="profile-text" data-aos="fade-left">
-                <h1 class="glitch-text" data-text="RICHU JOSEPH">RICHU JOSEPH</h1>
-                <div class="terminal-text">Cybersecurity Specialist</div>
-                <p>Student at St. Joseph's College of Engineering and Technology, Palai</p>
-                <p>Specializing in Bug Bounty Programs, CTFs, and Ethical Hacking</p>
+        <div class=" container">
+            <div class="profile-content">
+                <div class="profile-image" data-aos="fade-right">
+                    <img src="https://raw.githubusercontent.com/richujoseph/my_web/refs/heads/main/richu%20.jpg" alt="Richu Joseph">
+                </div>
+                <div class="profile-text" data-aos="fade-left">
+                    <h1 class="glitch-text" data-text="RICHU JOSEPH">RICHU JOSEPH</h1>
+                    <div class="terminal-text">Cybersecurity Specialist</div>
+                    <p>Student at St. Joseph's College of Engineering and Technology, Palai</p>
+                    <p>Specializing in Bug Bounty Programs, CTFs, and Ethical Hacking</p>
+                </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-
-      <section id="about">
+    <section id="about">
         <div class="container">
             <h2 class="section-title" data-aos="fade-up">ABOUT ME</h2>
             <div class="about-content" data-aos="fade-up">
-                <p>Hello! I'm <strong>Richu Joseph</strong>, a passionate Cybersecurity Enthusiast and a dedicated student at <strong>St. Joseph's College of Engineering and Technology, Palai</strong>. My journey in the world of technology began with a fascination for how systems work and the importance of securing them against threats.</p>
-                <p>I specialize in <strong>Bug Bounty Programs</strong>, <strong>Capture The Flag (CTF)</strong> challenges, and <strong>Ethical Hacking</strong>. My interest in these areas stems from a desire to understand vulnerabilities and develop effective strategies to mitigate them. I believe that cybersecurity is not just about protecting systems but also about fostering a culture of awareness and proactive defense.</p>
-                <p>In addition to my technical skills, I enjoy collaborating with like-minded individuals and participating in community events that promote cybersecurity awareness. I am always eager to learn and stay updated with the latest trends and technologies in the field.</p>
-                <p>When I'm not immersed in cybersecurity, you can find me exploring new technologies, participating in hackathons, or sharing knowledge with peers. I am committed to making a positive impact in the cybersecurity landscape and helping organizations safeguard their digital assets.</p>
-            </div>
-        </div>
-    </section>
-   <style>
-       
-    .skill-progress {
-        background-color: #e0e0e0;
-        border-radius: 5px; 
-        height: 20px; 
-        margin: 5px 0; 
-    }
-
-    .skill-progress-bar {
-        background-color: #4CAF50;
-        height: 100%; 
-        border-radius: 5px; 
-        width: 0; 
-        transition: width 1s ease; 
-    }
-</style>
-
-<style>
-    .skill-progress {
-        background-color: #e0e0e0; 
-        border-radius: 5px; 
-        height: 20px; 
-        margin: 5px 0; 
-    }
-
-    .skill-progress-bar {
-        background-color: #76c7c0; 
-        height: 100%; 
-        border-radius: 5px; 
-        transition: width 0.5s ease; 
-    }
-</style>
-
-<style>
-    .skill-progress {
-        background-color: #e0e0e0; 
-        border-radius: 5px; 
-        height: 20px; 
-        margin: 5px 0; 
-    }
-
-    .skill-progress-bar {
-        background-color: #76c7c0; 
-        height: 100%; 
-        border-radius: 5px; 
-        transition: width 0.5s ease; 
-    }
-</style>
-
-<section id="skills">
-    <div class="container">
-        <h2 class="section-title" data-aos="fade-up">SKILLS</h2>
-        <div class="skills-grid">
-            <div class="skill-card" data-aos="fade-up" data-aos-delay="100">
-                <h3>Technical Skills</h3>
-                <div class="skill-item">
-                    <div class="skill-name">Python</div>
-                    <div class="skill-progress">
-                        <div class="skill-progress-bar" style="width: 90%"></div>
-                    </div>
-                </div>
-                <div class="skill-item">
-                    <div class="skill-name">Java</div>
-                    <div class="skill-progress">
-                        <div class="skill-progress-bar" style="width: 85%"></div>
-                    </div>
-                </div>
-                <div class="skill-item">
-                    <div class="skill-name">HTML</div>
-                    <div class="skill-progress">
-                        <div class="skill-progress-bar" style="width: 95%"></div>
-                    </div>
-                </div>
-                <div class="skill-item">
-                    <div class="skill-name">CSS</div>
-                    <div class="skill-progress">
-                        <div class="skill-progress-bar" style="width: 90%"></div>
-                    </div>
-                </div>
-                <div class="skill-item">
-                    <div class="skill-name">Bash Scripting</div>
-                    <div class="skill-progress">
-                        <div class="skill-progress-bar" style="width: 80%"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-                </div>
-                <!-- Add more skill cards -->
+                <p>Hello! I'm <strong>Richu Joseph</strong>, a passionate Cybersecurity Enthusiast and a dedicated student at <strong>St. Joseph's College of Engineering and Technology, Palai</strong>.</p>
+                <p>I specialize in <strong>Bug Bounty Programs</strong>, <strong>Capture The Flag (CTF)</strong> challenges, and <strong>Ethical Hacking</strong>.</p>
+                <p>When I'm not immersed in cybersecurity, you can find me exploring new technologies, participating in hackathons, or sharing knowledge with peers.</p>
             </div>
         </div>
     </section>
 
-   <section id="projects">
-    <div class="container">
-        <h2 class="section-title" data-aos="fade-up">PROJECTS</h2>
-        <div class="projects-grid">
-            <div class="project-card" data-aos="fade-up" data-aos-delay="200">
-                <h3>DoS Testing Tool</h3>
-                <p>A controlled testing environment for analyzing DoS vulnerabilities on local server setups using Python and C.</p>
-                <div class="project-tags">
-                    <span class="project-tag">Python</span>
-                    <span class="project-tag">C</span>
-                    <span class="project-tag">Network Testing</span>
-                </div>
-                <div class="project-links">
-                    <a href="#" class="project-link">View Project</a>
-                    <a href="#" class="project-link">Source Code</a>
-                </div>
-            </div>
-
-            <div class="project-card" data-aos="fade-up" data-aos-delay="300">
-                <h3>Random IP Generator</h3>
-                <p>Python script for generating and validating random IP addresses for network testing and security analysis.</p>
-                <div class="project-tags">
-                    <span class="project-tag">Python</span>
-                    <span class="project-tag">Networking</span>
-                </div>
-                <div class="project-links">
-                    <a href="#" class="project-link">View Project</a>
-                    <a href="#" class="project-link">Source Code</a>
-                </div>
-            </div>
-
-            <div class="project-card" data-aos="fade-up" data-aos-delay="400">
-                <h3>Network Scanner</h3>
-                <p>A comprehensive network scanning tool built with Python and Bash for identifying vulnerable services.</p>
-                <div class="project-tags">
-                    <span class="project-tag">Python</span>
-                    <span class="project-tag">Bash</span>
-                    <span class="project-tag">Security</span>
-                </div>
-                <div class="project-links">
-                    <a href="#" class="project-link">View Project</a>
-                    <a href="#" class="project-link">Source Code</a>
+    <section id="skills">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">SKILLS</h2>
+            <div class="skills-grid">
+                <div class="skill-card" data-aos="fade-up">
+                    <h3>Technical Skills</h3>
+                    <div class="skill-item">
+                        <div class="skill-name">Python</div>
+                        <div class="skill-progress">
+                            <div class="skill-progress-bar" style="width: 90%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">C</div>
+                        <div class="skill-progress">
+                            <div class="skill-progress-bar" style="width: 95%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">Java</div>
+                        <div class="skill-progress">
+                            <div class="skill-progress-bar" style="width: 85%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">HTML</div>
+                        <div class="skill-progress">
+                            <div class="skill-progress-bar" style="width: 95%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">CSS</div>
+                        <div class="skill-progress">
+                            <div class="skill-progress-bar" style="width: 90%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">Bash Scripting</div>
+                        <div class="skill-progress">
+                            <div class="skill-progress-bar" style="width: 80%"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
+
+    <section id="projects">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">PROJECTS</h2>
+            <div class="projects-grid">
+                <div class="project-card" data-aos="fade-up" data-aos-delay="200">
+                    <h3>DoS Testing Tool</h3>
+                    <p>A controlled testing environment for analyzing DoS vulnerabilities on local server setups.</p>
+                </div>
+                <div class="project-card" data-aos="fade-up" data-aos-delay="300">
+                    <h3>Random IP Generator</h3>
+                    <p>Python script for generating and validating random IP addresses for network testing.</p>
+                </div>
+                <div class="project-card" data-aos="fade-up" data-aos-delay="400">
+                    <h3>Network Scanner</h3>
+                    <p>A comprehensive network scanning tool built with Python and Bash.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <section id="contact">
-    <div class="container">
-        <h2 class="section-title" data-aos="fade-up">CONTACT ME</h2>
-        <div class="contact-links" data-aos="fade-up">
-            <p>Feel free to connect with me on:</p>
-            <ul class="social-links">
-                <li>
-                    <a href="https://in.linkedin.com/in/richu-joseph-7a1b50290" target="_blank">
-                        <img src="https://img.icons8.com/ios-filled/50/ffffff/linkedin.png" alt="LinkedIn" />
-                    </a>
-                </li>
-                <li>
-                    <a href="https://github.com/richujoseph" target="_blank">
-                        <img src="https://img.icons8.com/ios-filled/50/ffffff/github.png" alt="GitHub" />
-                    </a>
-                </li>
-            </ul>
+        <div class="container">
+            <h2 class="section-title" data-aos=" fade-up">CONTACT ME</h2>
+            <div class="contact-links" data-aos="fade-up">
+                <p>Feel free to connect with me on:</p>
+                <ul class="social-links">
+                    <li>
+                        <a href="https://in.linkedin.com/in/richu-joseph-7a1b50290" target="_blank">
+                            <img src="https://img.icons8.com/ios-filled/50/ffffff/linkedin.png" alt="LinkedIn" />
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/richujoseph" target="_blank">
+                            <img src="https://img.icons8.com/ios-filled/50/ffffff/github.png" alt="GitHub" />
+                        </a>
+                    </li>
+                </ul>
+            </div>
         </div>
-    </div>
-</section>
+    </section>
     
     <script>
         AOS.init({
@@ -569,10 +450,10 @@
         }
 
         function drawMatrix() {
-            ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-            ctx.fillStyle = '#0F0';
+            ctx.fillStyle = 'rgba(0, 255, 76, 0.8)';
             ctx.font = fontSize + 'px monospace';
 
             for (let i = 0; i < drops.length; i++) {
@@ -592,29 +473,6 @@
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
         });
-
-        // Animate skill bars on scroll
-        const animateSkills = () => {
-            const skillBars = document.querySelectorAll('.skill-progress-bar');
-            skillBars.forEach(bar => {
-                const width = bar.getAttribute('data-width');
-                bar.style.width = width;
-            });
-        };
-
-        // Intersection Observer for skill animations
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    animateSkills();
-                }
-            });
-        });
-
-        const skillsSection = document.querySelector('#skills');
-        if (skillsSection) {
-            observer.observe(skillsSection);
-        }
     </script>
 </body>
 </html>
